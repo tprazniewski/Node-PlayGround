@@ -1,5 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const adminRoutes = require('./routes/admin')
+const shopRoutes = require('./routes/shop')
 // const http = require('http')
 
 const app = express();
@@ -13,23 +15,15 @@ const app = express();
 //     next()
 // })
 
-//We must add this middleware to have acces to req.body
-app.use(bodyParser.urlencoded())
+//We must add this middleware to have acces to req.body|| extened false shoud parse none default features 
+app.use(bodyParser.urlencoded({extended: false}))
 
-app.use('/add-product', (req, res, next) => {
-    return res.send(` <form action='/product' method='POST'> <input type='text' name='title'> <button type='submit'> Send</button>  </form>`)
-})
-
-app.post('/product', (req, res, next) => {
-
-    console.log(req.body)
-    res.redirect('/')
-    // next()
-})
+app.use(adminRoutes)
+app.use(shopRoutes)
 
 app.use('/', (req, res, next) => {
     // next()
-    return res.send('<h2> Home Page </h2>')
+    return res.send('<h2> Default Page </h2>')
 })
 
 
