@@ -20,7 +20,7 @@ const fs = require('fs')
        return req.on('end', () => {
             const parseBody = Buffer.concat(body).toString();
             console.log(parseBody)
-            const message = parseBody.split('=')[1]
+            const message = parseBody. split('=')[1]
             // fs.writeFileSync('message.txt', message)
             fs.writeFile('message.txt', message, (err) => {
                 res.statusCode= 302
