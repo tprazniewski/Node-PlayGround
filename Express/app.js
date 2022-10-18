@@ -5,11 +5,17 @@ const shopRoutes = require('./routes/shop')
 const path = require('path')
 const rootDir = require('./utils/path')
 const { dirname } = require('path')
+const expressHbs = require('express-handlebars')
+
 // const http = require('http')
 
 const app = express();
+//We can give it whatEverNname
+app.engine('handlebars', expressHbs())
+app.set('view engine', 'handlebars')
+
 //We tell express wtich engine we gonna use to compile our html templates
-app.set('view engine', 'pug')
+// app.set('view engine', 'pug')
 //the second argument is views as edault || show swhere the tempates can be found
 app.set('views', 'views')
 // app.use((req,res,next)=> {
@@ -32,7 +38,7 @@ app.use(shopRoutes)
 app.use((req,res,next)=>{
     // res.status(404).sendFile(path.join(rootDir, 'views', 'page-not-found.html'))
 
-    res.status(404).render('404', {pageTitle: 'Page not Found!!' })
+    res.status(404).render('404', {pageTitle: 'Page not Found!!!' })
 })
 
 
