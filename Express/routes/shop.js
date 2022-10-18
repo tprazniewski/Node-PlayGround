@@ -12,7 +12,7 @@ router.get('/', (req, res, next) =>{
     // console.log('from shop',products)
     // return res.sendFile(path.join(rootDir,'views', 'shop.html'))
     // --------------------------------------------------------------------------------------------
-    res.render('shop',{productList: products, title: "Shopping" })
+    res.render('shop',{productList: products, title: "Shopping", active: 'shop'})
 })
 
 
