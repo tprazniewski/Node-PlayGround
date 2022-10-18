@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const adminRoutes = require('./routes/admin')
+const {adminRoutes, products} = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 const path = require('path')
 const rootDir = require('./utils/path')
@@ -8,7 +8,10 @@ const { dirname } = require('path')
 // const http = require('http')
 
 const app = express();
-
+//We tell express wtich engine we gonna use to compile our html templates
+app.set('view engine', 'pug')
+//the second argument is views as edault || show swhere the tempates can be found
+app.set('views', 'views')
 // app.use((req,res,next)=> {
 //     console.log("this allways runs")
 //     next()
