@@ -20,7 +20,7 @@ const app = express();
 
 //We must add this middleware to have acces to req.body|| extened false shoud parse none default features 
 app.use(bodyParser.urlencoded({extended: false}))
-//Read only
+//Create a root path for static files so easier to imper files from that folder in html files!!Read only!! 
 app.use(express.static(path.join(rootDir,'public')))
 
 app.use(('/admin'), adminRoutes)
