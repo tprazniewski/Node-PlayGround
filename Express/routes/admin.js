@@ -10,7 +10,7 @@ router.get('/add-product', (req, res, next) => {
         // return res.sendFile(path.join(__dirname, '../', 'views', 'add-product.html'))
     // return res.send(` <form action='/admin/product' method='POST'> <input type='text' name='title'> <button type='submit'> Send</button>  </form>`)
 
-    res.render('add-product',{ pageTitle: "Add product!", active: 'admin'})
+    res.render('add-product',{ pageTitle: "Add product!", active: 'admin', formsCSS: true, productCSS: true, activeProduct: true})
 
 })
 

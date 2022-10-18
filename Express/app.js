@@ -11,7 +11,8 @@ const expressHbs = require('express-handlebars')
 
 const app = express();
 //We can give it whatEverNname
-app.engine('handlebars', expressHbs())
+// app.engine('handlebars', expressHbs())
+app.engine('handlebars', expressHbs({layoutsDir: 'views/layouts/',defaultLayout: 'main-layout'}))
 app.set('view engine', 'handlebars')
 
 //We tell express wtich engine we gonna use to compile our html templates
