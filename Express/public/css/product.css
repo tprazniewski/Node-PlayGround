@@ -1,0 +1,37 @@
+  .product-form {
+    width: 15rem;
+    max-width: 90%;
+    margin: auto;
+  }
+
+  .form-control label,
+  .form-control input{
+    /*  takes a full avaialble width: ; */
+    display: block; 
+    width: 100%;
+  }
+
+  .form-control{
+    margin: 1rem 0;
+  }
+  .form-control input{
+    border: 1px solid #6200ff;
+    font: inherit;
+    border-radius: 1rem;
+    color:darkblue;
+    cursor: pointer;
+
+  }
+  button {
+    font:inherit;
+    border: 1px solid #6200ff;
+    background-color: aqua;
+    border-radius: 1rem;
+    cursor: pointer;
+
+  }
+  button:hover,
+  button:active{
+    background-color: #6200ff;
+    color: white;
+  }

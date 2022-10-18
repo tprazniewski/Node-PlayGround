@@ -4,6 +4,7 @@ const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 const path = require('path')
 const rootDir = require('./utils/path')
+const { dirname } = require('path')
 // const http = require('http')
 
 const app = express();
@@ -19,6 +20,8 @@ const app = express();
 
 //We must add this middleware to have acces to req.body|| extened false shoud parse none default features 
 app.use(bodyParser.urlencoded({extended: false}))
+//Read only
+app.use(express.static(path.join(rootDir,'public')))
 
 app.use(('/admin'), adminRoutes)
 app.use(shopRoutes)
