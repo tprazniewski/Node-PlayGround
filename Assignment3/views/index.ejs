@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index!</title>
+</head>
+<body>
+    <%-include('includes/navigation.ejs') %>
+    <div class="grid" >
+        <form action="/users" method="POST" >
+            <div>
+                <label for="name"> Input Name</label>
+                <input name="name" id="name" type="text">
+            </div>
+            <div>
+                <label for="surname"> Input Surname</label>
+                <input name="surname" id="surname" type="text">
+            </div>
+            <button type="submit"> Add User</button>
+        </form>
+    </div>
+</body>
+</html>
