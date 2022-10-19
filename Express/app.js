@@ -6,6 +6,7 @@ const path = require('path')
 const rootDir = require('./utils/path')
 const { dirname } = require('path')
 const expressHbs = require('express-handlebars')
+const {get404} = require('./controllers/error')
 
 // const http = require('http')
 
@@ -38,14 +39,10 @@ app.use(bodyParser.urlencoded({extended: false}))
 //Create a root path for static files so easier to imper files from that folder in html files!!Read only!! 
 app.use(express.static(path.join(rootDir,'public')))
 
-app.use(('/admin'), adminRoutes)
+app.use('/admin', adminRoutes)
 app.use(shopRoutes)
 
-app.use((req,res,next)=>{
-    // res.status(404).sendFile(path.join(rootDir, 'views', 'page-not-found.html'))
-
-    res.status(404).render('404', {pageTitle: 'Page not Found!!!' })
-})
+app.use(get404)
 
 
 
