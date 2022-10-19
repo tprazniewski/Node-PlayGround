@@ -41,9 +41,11 @@ const Product = class Product {
     //V2
     fs.readFile(p,(err,data) =>{
         if (err){
-            return []
+         cb([])
         }
-        cb(JSON.parse(data))
+        else {
+         cb(JSON.parse(data))
+        }
     })
     
   }
