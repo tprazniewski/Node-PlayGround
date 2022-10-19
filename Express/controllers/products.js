@@ -33,20 +33,39 @@ const getAddProduct = (req, res) => {
     // console.log('from shop',products)
     // return res.sendFile(path.join(rootDir,'views', 'shop.html'))
     // --------------------------------------------------------------------------------------------
-    const products = await Product.findAll()
-    const products2 = JSON.parse(products)
+    //V1
 
-    console.log(products2.length)
-    console.log('controllers>products> getProducts:',products2)
-    res.render("shop", {
-      productList: products2,
-      pageTitle: "Shopping!",
-      active: "shop",
-      isProduct: products2.length > 0,
-      activeShop: true,
-      productCSS: true
-    });
+    // const products = await Product.findAll()
+    // const products2 = JSON.parse(products)
+
+    // console.log(products2.length)
+    // console.log('controllers>products> getProducts:',products2)
+    // res.render("shop", {
+    //   productList: products2,
+    //   pageTitle: "Shopping!",
+    //   active: "shop",
+    //   isProduct: products2.length > 0,
+    //   activeShop: true,
+    //   productCSS: true
+    // });
+
+    // --------------------------------------------------------------------------------------------
+    //V2
+    Product.findAll((products)=>{
+          res.render("shop", {
+            productList: products,
+            pageTitle: "Shopping!",
+            active: "shop",
+            isProduct: products.length > 0,
+            activeShop: true,
+            productCSS: true
+          });
+    })
+
   }
+
+
+
 module.exports = {
     getAddProduct,
     postAddProduct,

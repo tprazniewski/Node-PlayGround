@@ -26,15 +26,26 @@ const Product = class Product {
     })
   }
 
-  static  findAll() {
-    const prod = fs.readFileSync(p, (err,data)=>{
-        if(err){
+  static  findAll(cb) {
+    // --------------------------------------------------------------------------------------------------
+    //V1
+    // const prod = fs.readFileSync(p, (err,data)=>{
+    //     if(err){
+    //         return []
+    //     }
+    //     console.log('models>products',JSON.parse(data))
+    //     return JSON.parse(data)
+    // })
+    // return prod;
+    // --------------------------------------------------------------------------------------------------
+    //V2
+    fs.readFile(p,(err,data) =>{
+        if (err){
             return []
         }
-        console.log('models>products',JSON.parse(data))
-        return JSON.parse(data)
+        cb(JSON.parse(data))
     })
-    return prod;
+    
   }
 };
 
