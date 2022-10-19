@@ -5,7 +5,8 @@
   }
 
   .form-control label,
-  .form-control input{
+  .form-control input,
+  .form-control textarea{
     /*  takes a full avaialble width: ; */
     display: block; 
     width: 100%;
@@ -14,7 +15,8 @@
   .form-control{
     margin: 1rem 0;
   }
-  .form-control input{
+  .form-control input,
+  .form-control textarea{
     border: 1px solid #6200ff;
     font: inherit;
     border-radius: 1rem;

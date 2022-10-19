@@ -6,8 +6,11 @@ const products = [];
 const p = path.join(rootDir, "data", "products.json");
 
 const Product = class Product {
-  constructor(titl) {
-    this.title = titl;
+  constructor(t,img, desc, price ) {
+    this.title = t;
+    this.image = img;
+    this.description = desc;
+    this.price = price
   }
 
   // function save() { }
