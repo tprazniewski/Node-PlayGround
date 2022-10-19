@@ -5,6 +5,18 @@ const rootDir = require("../utils/path");
 const products = [];
 const p = path.join(rootDir, "data", "products.json");
 
+const getAllProducts = (cb)=>{
+  fs.readFile(p,(err,data) =>{
+    if (err){
+     cb([])
+    }
+    else {
+     cb(JSON.parse(data))
+    }
+})
+}
+
+
 const Product = class Product {
   constructor(t,img, desc, price ) {
     this.title = t;
@@ -15,6 +27,7 @@ const Product = class Product {
 
   // function save() { }
   save() {
+    this.id = Math.random().toString()
     // products.push(this);
     fs.readFile(p,(err, data)=> {
         let products = []
@@ -42,17 +55,31 @@ const Product = class Product {
     // return prod;
     // --------------------------------------------------------------------------------------------------
     //V2
-    fs.readFile(p,(err,data) =>{
-        if (err){
-         cb([])
-        }
-        else {
-         cb(JSON.parse(data))
-        }
-    })
+  //   fs.readFile(p,(err,data) =>{
+  //       if (err){
+  //        cb([])
+  //       }
+  //       else {
+  //        cb(JSON.parse(data))
+  //       }
+  //   })
     
-  }
+  // }
+  // static findById(id,cb){
+
+  // }
+  // --------------------------------------------------------------------------------------------------
+  getAllProducts(cb)
 };
+
+static  findbyId(id,cb) {
+  getAllProducts(products => {
+    const product = products.find(product => product.id === id)
+    cb(product)
+  })
+}
+}
+
 
 module.exports = {
   Product,

@@ -61,6 +61,13 @@ const getCart = (req, res, next ) => {
 
   })
 }
+const getOrders = (req, res, next ) => {
+  res.render('shop/order',{
+    active: "orders",
+    pageTitle: "Your Orders"
+
+  })
+}
 
 const getCheckout = (req, res, next) => {
   res.render('shop/checkout',{
@@ -70,9 +77,16 @@ const getCheckout = (req, res, next) => {
   })
 }
 
+const getPoduct = (req, res, next) => {
+  const {id} = req.params;
+  Product.findbyId(id,(p)=> console.log('from cb',p))
+  res.redirect('/')
+}
 module.exports = {
   getProducts,
   getindex,
   getCart,
-  getCheckout
+  getCheckout,
+  getOrders,
+  getPoduct
 };
