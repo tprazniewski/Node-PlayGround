@@ -25,7 +25,7 @@ const getAddProduct = (req, res) => {
     // next()
   }
 
-  const getProducts = (req, res, next) => {
+  const getProducts = async (req, res, next) => {
     // res.send('<h1> Hello from Shope Routes </h1>')
     // res.sendFile(path.join(__dirname,'..',  'views', 'shop.html'))
   
@@ -33,12 +33,16 @@ const getAddProduct = (req, res) => {
     // console.log('from shop',products)
     // return res.sendFile(path.join(rootDir,'views', 'shop.html'))
     // --------------------------------------------------------------------------------------------
-    const products = Product.findAll()
+    const products = await Product.findAll()
+    const products2 = JSON.parse(products)
+
+    console.log(products2.length)
+    console.log('controllers>products> getProducts:',products2)
     res.render("shop", {
-      productList: products,
+      productList: products2,
       pageTitle: "Shopping!",
       active: "shop",
-      isProduct: products.length > 0,
+      isProduct: products2.length > 0,
       activeShop: true,
       productCSS: true
     });
