@@ -6,7 +6,7 @@ const getAddProduct = (req, res) => {
     // return res.sendFile(path.join(__dirname, '../', 'views', 'add-product.html'))
     // return res.send(` <form action='/admin/product' method='POST'> <input type='text' name='title'> <button type='submit'> Send</button>  </form>`)
   
-    res.render("admin/edit-product", {
+    res.render("admin/add-product", {
       pageTitle: "Add product!",
       active: "admin",
       formsCSS: true,
@@ -40,7 +40,7 @@ const getAddProduct = (req, res) => {
   const postAddProduct = (req, res, next) => {
     const { title, description, price, image  } = req.body;
     console.log("postAddProduct function")
-    const product = new Product(title, image, description, price)
+    const product = new Product(null,title, image, description, price)
     product.save()
     // products.push({ title });
     res.redirect("/");
@@ -59,7 +59,11 @@ const getAddProduct = (req, res) => {
   }
 
   const postEditProduct = (req, res, next) =>{
-    const {title,description,price,url} = req.body
+    const {id,title,description,price,image} = req.body
+    console.log(id,title,description,price,image)
+    const update = new Product(id,title,image,description,price)
+    update.save()
+    res.redirect('/admin/products')
   }
 
   module.exports = {
