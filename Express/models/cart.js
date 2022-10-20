@@ -26,7 +26,7 @@ const Cart = class Cart {
                 cart.products = [...cart.products, updatedProduct]
             }
             // cart.totalPrice = cart.totalPrice + productPrice
-            cart.totalPrice +=  productPrice
+            cart.totalPrice +=  +productPrice
             console.log('cart',cart)
             fs.writeFile(p, JSON.stringify(cart), err => {
                 console.log(err);
