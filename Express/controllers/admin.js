@@ -66,10 +66,17 @@ const getAddProduct = (req, res) => {
     res.redirect('/admin/products')
   }
 
+  const deleteEditProduct = (req, res, next) => {
+    const {id} = req.body;
+    
+
+  }
+
   module.exports = {
     postAddProduct,
     getAddProduct,
     getProducts,
     getEditProduct,
-    postEditProduct
+    postEditProduct,
+    deleteEditProduct
   }

@@ -55,6 +55,17 @@ const Product = class Product {
     })
   }
 
+  static delete(id) {
+    getAllProducts(products=>{
+      const updateProducts = products.filter(p => p.id !== id)
+      fs.writeFile(p,JSON.stringify(updateProducts),(err)=>{
+        if(!err){
+          
+        }
+      })
+    })
+  }
+
   static  findAll(cb) {
     // --------------------------------------------------------------------------------------------------
     //V1
