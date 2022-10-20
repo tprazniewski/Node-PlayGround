@@ -79,8 +79,15 @@ const getCheckout = (req, res, next) => {
 
 const getPoduct = (req, res, next) => {
   const {id} = req.params;
-  Product.findbyId(id,(p)=> console.log('from cb',p))
-  res.redirect('/')
+  Product.findbyId(id,(p)=> {
+    console.log('from cb',p)
+    res.render('shop/product-detail.ejs',{
+      product: p,
+      pageTitle: "Product Details!",
+      active: "product",
+    })
+  })
+  // res.redirect('/')
 }
 module.exports = {
   getProducts,

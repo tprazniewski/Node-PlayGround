@@ -6,14 +6,14 @@ const products = [];
 const p = path.join(rootDir, "data", "products.json");
 
 const getAllProducts = (cb)=>{
-  fs.readFile(p,(err,data) =>{
-    if (err){
-     cb([])
-    }
-    else {
-     cb(JSON.parse(data))
-    }
-})
+    fs.readFile(p,(err,data) =>{
+      if (err){
+      cb([])
+      }
+      else {
+      cb(JSON.parse(data))
+      }
+  })
 }
 
 
@@ -73,11 +73,11 @@ const Product = class Product {
 };
 
 static  findbyId(id,cb) {
-  getAllProducts(products => {
-    const product = products.find(product => product.id === id)
-    cb(product)
-  })
-}
+    getAllProducts(products => {
+      const product = products.find(product => product.id === id)
+      cb(product)
+    })
+  }
 }
 
 
