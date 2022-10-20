@@ -22,9 +22,7 @@
                         </div>
                         <div class="card__actions">
                             <a href="/products/<%=product.id%>" class="btn" style="text-decoration:none; padding: 0.15rem;"> Details</a>
-                            <form action="/add-to-cart" method="POST">
-                                <button class="btn"> Add to card!</button>
-                            </form>
+                            <%- include('../includes/add_to_cart.ejs', {product: product} ) %>
                         </div>
                     </article>
                 <% } %>
