@@ -40,6 +40,7 @@ const Cart = class Cart {
             if(err) return
         const updatedCart = {...JSON.parse(content) }
         const product = updatedCart.products.find(prod=> prod.id ===id)
+        if (!product) {return} 
         console.log("productCART!!!!!",product)
         const productQuantity = product.quantity
         updatedCart.products = updatedCart.products.filter(p => p.id !== id)
