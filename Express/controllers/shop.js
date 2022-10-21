@@ -65,7 +65,6 @@ const getCart = (req, res, next ) => {
         if(cartProductData){
           cartProducts.push({productDAta: product, quantity: cartProductData.quantity })                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
         }
-        console.log("ShopController>getCart:",cartProducts)
       }
       res.render('shop/cart',{
         active: "cart",
@@ -97,7 +96,6 @@ const getCheckout = (req, res, next) => {
 const getPoduct = (req, res, next) => {
   const {id} = req.params;
   Product.findbyId(id,(p)=> {
-    console.log('from cb',p)
     res.render('shop/product-detail.ejs',{
       product: p,
       pageTitle: "Product Details!",
@@ -109,11 +107,20 @@ const getPoduct = (req, res, next) => {
 const postCart = (req,res,next) =>{
   const {productId}=req.body
   Product.findbyId(productId, (product)=>{
-    console.log('productId:', productId)
-    console.log("product:",product)
+
     Cart.addProduct(productId, product.price)
   })  
   res.redirect('/cart')
+}
+
+const postCartDelete = (req, res, next) => {
+  const {id} = req.body
+  console.log("id", id)
+  Product.findbyId(id , product =>{
+    Cart.deleteProduct(id, product.price)
+    res.redirect('/cart')
+
+  })
 }
 
 module.exports = {
@@ -123,5 +130,6 @@ module.exports = {
   postCart,
   getCheckout,
   getOrders,
-  getPoduct
+  getPoduct,
+  postCartDelete
 };
