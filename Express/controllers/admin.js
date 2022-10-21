@@ -68,7 +68,8 @@ const getAddProduct = (req, res) => {
 
   const deleteEditProduct = (req, res, next) => {
     const {id} = req.body;
-    
+    Product.delete(id)
+    res.redirect('/admin/products')
 
   }
 

@@ -13,6 +13,6 @@ router.get("/products", getProducts)
 
 router.get('/edit-product/:id', getEditProduct)
 router.post('/edit-product/', postEditProduct)
-router.delete('/delete-product ', deleteEditProduct)
+router.post('/delete-product/', deleteEditProduct)
 // module.exports = router
 exports.adminRoutes = router;

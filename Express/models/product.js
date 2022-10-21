@@ -3,6 +3,8 @@ const path = require("path");
 const { getProducts } = require("../controllers/admin");
 const rootDir = require("../utils/path");
 
+const {Cart} = require('./cart')
+
 const products = [];
 const p = path.join(rootDir, "data", "products.json");
 
@@ -57,10 +59,11 @@ const Product = class Product {
 
   static delete(id) {
     getAllProducts(products=>{
+      const product = products.find(prod => prod.id = id)
       const updateProducts = products.filter(p => p.id !== id)
       fs.writeFile(p,JSON.stringify(updateProducts),(err)=>{
         if(!err){
-          
+          Cart.deleteProduct(id, product.price)
         }
       })
     })
@@ -106,5 +109,5 @@ static  findbyId(id,cb) {
 
 
 module.exports = {
-  Product,
+  Product
 };
