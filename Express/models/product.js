@@ -13,7 +13,9 @@ const Product = class Product {
 
   // function save() { }
   save() {
-
+    return db.execute('INSERT INTO products (title,price,image_url,description) VALUES (?,?,?,?)',
+    [this.title, this.price, this.image, this.description]         
+    )
   }
 
   static delete(id) {

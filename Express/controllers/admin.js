@@ -2,10 +2,7 @@ const {Product} = require('../models/product')
 
 
 const getAddProduct = (req, res) => {
-    // return res.sendFile(path.join(rootDir,'views', 'add-product.html'))
-    // return res.sendFile(path.join(__dirname, '../', 'views', 'add-product.html'))
-    // return res.send(` <form action='/admin/product' method='POST'> <input type='text' name='title'> <button type='submit'> Send</button>  </form>`)
-  
+
     res.render("admin/add-product", {
       pageTitle: "Add product!",
       active: "admin",
@@ -41,11 +38,13 @@ const getAddProduct = (req, res) => {
     const { title, description, price, image  } = req.body;
     console.log("postAddProduct function")
     const product = new Product(null,title, image, description, price)
-    product.save()
-    // products.push({ title });
-    res.redirect("/");
-  
-    // next()
+    product
+    .save()
+    .then(()=>{
+        res.redirect("/")
+    })
+    .catch(err => console.log(err))
+
   }
 
   const getProducts = (req, res, next) => {
