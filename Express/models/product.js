@@ -28,8 +28,8 @@ const Product = class Product {
   };
 
   static  findbyId(id) {
-
-    }
+    return db.execute(`SELECT * FROM products where id=${id}`)
+  }
 }
 
 

@@ -69,13 +69,15 @@ const getCheckout = (req, res, next) => {
 
 const getPoduct = (req, res, next) => {
   const {id} = req.params;
-  Product.findbyId(id,(p)=> {
+  Product.findbyId(id)
+  .then(([p])=>{
     res.render('shop/product-detail.ejs',{
-      product: p,
-      pageTitle: "Product Details!",
+      product: p[0],
+      pageTitle: p[0].title,
       active: "product",
     })
   })
+  .catch(err => console.log(err))
   // res.redirect('/')
 }
 const postCart = (req,res,next) =>{
