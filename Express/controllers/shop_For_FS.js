@@ -42,18 +42,17 @@ const getProducts = async (req, res, next) => {
 };
 
 const getindex = (req, res, next) => {
-  Product.findAll()
-  .then(([rows,data]) =>{
-
-      res.render("shop/index", {
-        productList: rows,
-        pageTitle: "Shopping!",
-        active: "shop"
-      });
-  })
-  .catch(err=> console.log(err))
-
-  
+  Product.findAll((products) => {
+    res.render("shop/index", {
+      productList: products,
+      pageTitle: "Shopping!",
+      active: "shop",
+      //for handlepars views engine
+      // isProduct: products.length > 0,
+      // activeShop: true,
+      // productCSS: true,
+    });
+  });
 };
 
 const getCart = (req, res, next ) => {
