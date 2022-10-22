@@ -7,6 +7,9 @@ const rootDir = require('./utils/path')
 const { dirname } = require('path')
 const expressHbs = require('express-handlebars')
 const {get404} = require('./controllers/error')
+const db = require('./DB/mySql')
+
+
 
 // const http = require('http')
 
