@@ -68,11 +68,11 @@ const getCheckout = (req, res, next) => {
 
 const getPoduct = (req, res, next) => {
   const { id } = req.params;
-  Product.findbyId(id)
-    .then(([p]) => {
+  Product.findByPk(id)
+    .then((p) => {
       res.render("shop/product-detail.ejs", {
-        product: p[0],
-        pageTitle: p[0].title,
+        product: p,
+        pageTitle: p.title,
         active: "product",
       });
     })
@@ -89,7 +89,6 @@ const postCart = (req, res, next) => {
 
 const postCartDelete = (req, res, next) => {
   const { id } = req.body;
-  console.log("id", id);
   Product.findbyId(id, (product) => {
     Cart.deleteProduct(id, product.price);
     res.redirect("/cart");
