@@ -1,38 +1,27 @@
-const db = require('../DB/mySql')
+const Sequalize = require('sequelize')
 
-const {Cart} = require('./cart')
+const {sequalize} = require('../DB/mySql')
 
-const Product = class Product {
-  constructor(id,t,img, desc, price ) {
-    this.id = id
-    this.title = t;
-    this.image = img;
-    this.description = desc;
-    this.price = price
+const Product = sequalize.define('product', {
+  id: {
+    type: Sequalize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
+  },
+  title: Sequalize.STRING,
+  price: {
+    type: Sequalize.DOUBLE,
+    allowNull: false
+  },
+  imageUrl: {
+    type: Sequalize.STRING,
+    allowNull: false,
+  },
+  description: {
+    type: Sequalize.STRING,
+    allowNull: false
   }
+})
 
-  // function save() { }
-  save() {
-    return db.execute('INSERT INTO products (title,price,image_url,description) VALUES (?,?,?,?)',
-    [this.title, this.price, this.image, this.description]         
-    )
-  }
-
-  static delete(id) {
-
-  }
-
-  static  findAll() {
-    return db.execute('SELECT * FROM products')
-    
-  };
-
-  static  findbyId(id) {
-    return db.execute(`SELECT * FROM products where id=${id}`)
-  }
-}
-
-
-module.exports = {
-  Product
-};
+module.exports = {Product}
