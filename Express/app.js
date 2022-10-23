@@ -8,6 +8,8 @@ const { dirname } = require("path");
 const expressHbs = require("express-handlebars");
 const { get404 } = require("./controllers/error");
 const { sequelize } = require("./DB/mySql.js");
+const {Product} = require('./models/product')
+const {User} = require('./models/user')
 
 // const http = require('http')
 
@@ -45,8 +47,11 @@ app.use(shopRoutes);
 
 app.use(get404);
 
+Product.belongsTo(User, {constraints: true, onDelete: 'CASCADE'})
+User.hasMany(Product)
+
 sequelize
-  .sync()
+  .sync({force: true})
   .then((res) =>app.listen(3001))
   .catch((err) => console.log(err));
 

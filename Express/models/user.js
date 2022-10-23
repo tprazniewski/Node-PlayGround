@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize')
+const {sequelize} = require('../DB/mySql')
 
 
- const sequelize = Sequelize.define(user,{
+ const User = sequelize.define('user',{
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -22,4 +23,4 @@ const Sequelize = require('sequelize')
     }
  })
 
- module.exports = {sequelize}
+ module.exports = {User}
