@@ -36,8 +36,13 @@ const getAddProduct = (req, res) => {
 
   const postAddProduct = (req, res, next) => {
     const { title, description, price, image  } = req.body;
-    Product.create({title, price, imageUrl:image, description})
-    .then(res=> console.log("crested Product"))
+    console.log("postAddProduct function")
+    const product = new Product(null,title, image, description, price)
+    product
+    .save()
+    .then(()=>{
+        res.redirect("/")
+    })
     .catch(err => console.log(err))
 
   }

@@ -10,13 +10,13 @@ require("dotenv").config();
 
 // module.exports = pool.promise()
 
-const Sequalize = require("sequalize");
+const Sequelize = require("sequelize");
 
-const sequalize = new Sequalize(
+const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
   process.env.DB_PASS,
   { dialect: "mysql", host: process.env.DB_HOST }
 );
 
-module.exports = {sequalize}
+module.exports = {sequelize}

@@ -7,6 +7,7 @@ const rootDir = require("./utils/path");
 const { dirname } = require("path");
 const expressHbs = require("express-handlebars");
 const { get404 } = require("./controllers/error");
+const { sequelize } = require("./DB/mySql.js");
 
 // const http = require('http')
 
@@ -44,6 +45,11 @@ app.use(shopRoutes);
 
 app.use(get404);
 
-app.listen(3001);
+sequelize
+  .sync()
+  .then((res) =>app.listen(3001))
+  .catch((err) => console.log(err));
+
+
 // const server = http.createServer(app)
 // server.listen(3001)
