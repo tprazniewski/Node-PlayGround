@@ -8,8 +8,10 @@ const { dirname } = require("path");
 const expressHbs = require("express-handlebars");
 const { get404 } = require("./controllers/error");
 const { sequelize } = require("./DB/mySql.js");
-const {Product} = require('./models/product')
-const {User} = require('./models/user')
+const { Product } = require("./models/product");
+const { User } = require("./models/user");
+const { Cart } = require("./models/cart");
+const { CartItem } = require("./models/cart-item");
 
 // const http = require('http')
 
@@ -42,19 +44,45 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //Create a root path for static files so easier to imper files from that folder in html files!!Read only!!
 app.use(express.static(path.join(rootDir, "public")));
 
+app.use((req,res,next)=>{
+  User.findByPk(1)
+  .then(user=> {
+    req.user=user
+    next()
+  })
+  .catch(err =>console.log(err))
+})
+
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 
 app.use(get404);
 
-Product.belongsTo(User, {constraints: true, onDelete: 'CASCADE'})
-User.hasMany(Product)
+Product.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
+User.hasMany(Product);
+
+User.hasOne(Cart)
+Cart.belongsTo(User)
+
+Cart.belongsToMany(Product, {through: CartItem})
+Product.belongsToMany(Cart, {through: CartItem})
 
 sequelize
-  .sync({force: true})
-  .then((res) =>app.listen(3001))
-  .catch((err) => console.log(err));
-
+  .sync({force:true})
+  .then((res) => {
+    return User.findByPk(1)
+  })
+  .then(user=>{
+    if(!user){
+      return User.create({name: "Tomasz", surname: "Prazniewski", age: 33, email: "tprazniewski@gmail.com"})
+    }
+    // return Promise.resolve(user) // is the same as the line below as when we use return it wraps with Promise automatically
+    return user
+ź  })
+.then(user=>{
+  app.listen(3000)
+})
+.catch((err) => console.log(err));
 
 // const server = http.createServer(app)
 // server.listen(3001)

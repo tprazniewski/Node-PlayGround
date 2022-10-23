@@ -20,6 +20,10 @@ const {sequelize} = require('../DB/mySql')
     age: {
         type: Sequelize.INTEGER,
         allownull: false,
+    },
+    email: {
+        type: Sequelize.STRING,
+        allownull: false,
     }
  })
 

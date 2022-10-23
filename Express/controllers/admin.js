@@ -13,9 +13,10 @@ const getAddProduct = (req, res) => {
 
 const getEditProduct = (req, res, next) => {
   const { id } = req.params;
-  Product.findByPk(id)
-    .then((product) => {
-      if (!product) {
+  req.user.getProducts()
+  // Product.findByPk(id)
+    .then((products) => {
+      if (!products) {
         return res.redirect("/");
       }
 
@@ -23,7 +24,7 @@ const getEditProduct = (req, res, next) => {
         pageTitle: "Add product!",
         active: "adminEdit",
         editing: "true",
-        product: product,
+        product: products[0],
       });
     })
     .catch((err) => console.log(err));
@@ -31,14 +32,18 @@ const getEditProduct = (req, res, next) => {
 
 const postAddProduct = (req, res, next) => {
   const { title, description, price, image } = req.body;
-  Product.create({ title, price, image, description })
+  req.user
+    .createProduct({ title, price, image, description })
+
+    // Product.create({ title, price, image, description,userId: req.user.id })
     .then((res) => console.log("crested Product"))
     .catch((err) => console.log(err));
-    res.redirect('/')
+  res.redirect("/");
 };
 
 const getProducts = (req, res, next) => {
-  Product.findAll()
+  req.user.getProducts()
+  // Product.findAll()
     .then((products) => {
       res.render("admin/products", {
         productList: products,
@@ -54,11 +59,11 @@ const postEditProduct = (req, res, next) => {
   const update = new Product(id, title, image, description, price);
   Product.findByPk(id)
     .then((product) => {
-      product.title = title,
-      product.description = description,
-      product.price = price
-      product.image = image
-      product.save()
+      (product.title = title),
+        (product.description = description),
+        (product.price = price);
+      product.image = image;
+      product.save();
     })
     .catch((err) => {
       console.log(err);
@@ -68,7 +73,7 @@ const postEditProduct = (req, res, next) => {
 
 const deleteEditProduct = (req, res, next) => {
   const { id } = req.body;
-  Product.destroy({where: {id}})
+  Product.destroy({ where: { id } });
   res.redirect("/admin/products");
 };
 
