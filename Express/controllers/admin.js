@@ -34,6 +34,7 @@ const postAddProduct = (req, res, next) => {
   Product.create({ title, price, image, description })
     .then((res) => console.log("crested Product"))
     .catch((err) => console.log(err));
+    res.redirect('/')
 };
 
 const getProducts = (req, res, next) => {
@@ -57,9 +58,8 @@ const postEditProduct = (req, res, next) => {
       product.description = description,
       product.price = price
       product.image = image
-      return product.save()
+      product.save()
     })
-    .then(p => console.log(p))
     .catch((err) => {
       console.log(err);
     });
@@ -68,7 +68,7 @@ const postEditProduct = (req, res, next) => {
 
 const deleteEditProduct = (req, res, next) => {
   const { id } = req.body;
-  Product.delete(id);
+  Product.destroy({where: {id}})
   res.redirect("/admin/products");
 };
 
