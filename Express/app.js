@@ -54,7 +54,7 @@ app.use((req,res,next)=>{
 })
 
 app.use("/admin", adminRoutes);
-app.use(shopRoutes);
+app.use(shopRoutes); 
 
 app.use(get404);
 
@@ -62,7 +62,7 @@ Product.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
 User.hasMany(Product);
 
 User.hasOne(Cart)
-Cart.belongsTo(User)
+Cart.belongsTo(  )
 
 Cart.belongsToMany(Product, {through: CartItem})
 Product.belongsToMany(Cart, {through: CartItem})
